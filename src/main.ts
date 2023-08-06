@@ -34,7 +34,7 @@ const fetchPosts = (): Promise<Post[]> => {
 const tenPosts = async () => {
   const data: Post[] = await fetchPosts();
 
-  const tenPosts = data.slice(0, 10);
+  const tenPosts = data.slice(0, length-1);
   tenPosts.forEach((post) => {
     displayPosts(post);
   });
@@ -79,7 +79,8 @@ const displayPosts = (post: Post) => {
     populationElement.textContent = `Population: ${post.population}`;
 
     const languagesElement = document.createElement("p");
-    languagesElement.textContent = `Languages: ${post.languages}`;
+    const languagesNames = post.languages.map((language) => language.name).join(', ');
+    languagesElement.textContent = `Languages: ${languagesNames}`;
 
     card.appendChild(flagImage);
     card.appendChild(nameElement);
